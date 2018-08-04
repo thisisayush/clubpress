@@ -1,0 +1,22 @@
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+
+<div id="" class="bg-white">
+    <div id="" class="" name="{{ widget.name }}">
+        {% if widget.value %}{{ widget.value }}{% endif %}
+    </div>
+</div>
+<script>
+    require(['jquery', 'quill'], function($){
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'italic'],
+            [{'list':'ordered'}, {'list':'bullet'}],
+            ['clean']
+        ];
+        var quill = new Quill($(""), {
+            modules: {
+            toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        });
+    });
+</script>

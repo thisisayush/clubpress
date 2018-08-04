@@ -1,0 +1,18 @@
+{% extends 'club/_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Register a club{% endblock %}
+
+{% block content %}
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 card">
+                <div class="card-body">
+                    <h2 class="card-title text-center font-weight-bold">Register a Club</h2>
+                    {% crispy form %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

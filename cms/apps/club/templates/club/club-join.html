@@ -1,0 +1,104 @@
+{% extends 'club/_base.html' %}
+{% block title %}Join {{ club.name }}{% endblock %}
+{% block content %}
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="card card-profile">
+                    <div class="card-header" style="background-size:cover; background-image: url('{% if club.cover_image %}{{ club.cover_image.url }}{% else %}https://picsum.photos/1440/900/?random{% endif %}');">
+                    </div>
+                    <div class="card-body text-center">
+                        <img class="card-profile-img" src="{% if club.logo %}{{ club.logo.url }}{% else %}https://picsum.photos/300/300/?random{% endif %}">
+                        <h3 class="mb-3">{{ club.name }}</h3>
+                        <p class="mb-3"><i class="fa fa-user"></i> {{ club_meta.members|length }} Members</p>
+                        <p class="mb-4">{{ club.short_description }}</p>
+                        <ul class="social-links list-inline mb-0 mt-2">
+                            {% if club.facebook %}
+                            <li class="list-inline-item">
+                                <a href="{{ club.facebook }}" title="Follow us on Facebook!" data-toggle="tooltip" data-original-title="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if club.twitter %}
+                            <li class="list-inline-item">
+                                <a href="{{ club.twitter }}" title="" data-toggle="tooltip" data-original-title="Twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if club.phone %}
+                            <li class="list-inline-item">
+                                <a href="tel://+91{{ club.phone }}" title="" data-toggle="tooltip" data-original-title="1234567890">
+                                    <i class="fa fa-phone"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if club.email %}
+                            <li class="list-inline-item">
+                                <a href="mailto:{{ club.email }}" title="" data-toggle="tooltip" data-original-title="@skypename">
+                                    <i class="fa fa-mail"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if club.website %}
+                            <li class="list-inline-item">
+                                <a href="{{ club.website }}" title="" data-toggle="tooltip" data-original-title="@skypename">
+                                    <i class="fa fa-globe"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="page-header mt-0">
+                    <h3 class="page-title">Club Registration</h3>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Basic Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>First Name:</strong> {{ user.first_name }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Last Name:</strong> {{ user.last_name }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Email:</strong> {{ user.email }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Mobile:</strong> {{ user.mobile }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Department:</strong> {{ user.department}}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Branch:</strong> {{ user.branch }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Section-Batch:</strong> {{ user.section }}{{ user.branch.short_name }}-{{ user.batch }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Extra Details</h3>
+                        
+                    </div>
+                </div> -->
+                <div>
+                    <a class="btn btn-outline-danger float-left" href="{% url 'club:club-home' club.slug %}">Cancel</a>
+                    <a class="btn btn-outline-primary float-right" href="?register=true">Apply</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

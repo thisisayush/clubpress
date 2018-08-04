@@ -1,0 +1,290 @@
+{% load static %}
+{% load core_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+</head>
+<style>
+    *{
+        font-size: 3.5mm;
+    }
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+    body {
+        /* background-color: aqua; */
+        margin:0;
+    }
+    .container {
+        padding-left: 12mm!important;
+        padding-right: 12mm!important;
+        max-width: 210mm!important;
+    }
+    .page{
+        height: 297mm;
+        width: 210mm;
+        /* background-color: #FFF; */
+        /* position: relative; */
+        overflow: hidden;
+        page-break-after: always;
+        box-sizing: border-box;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        margin: 10px auto;
+    }
+    .page-header {
+        height: 35mm;    
+        text-align: center;
+    }
+    .logo {
+        height: 25mm;
+    }
+    .header-title{
+        text-transform: uppercase;
+        font-size: 10mm;
+        font-family:'Times New Roman', Times, serif;
+    }
+    .header-left{
+        position: relative;
+        width: 21mm;
+        margin-right: 3mm;
+    }
+    .header-right {
+        position: relative;
+        width: 110mm;
+    }
+    .header-subtitle{
+        text-transform: uppercase;
+        font-size: 7mm;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .header-subtitle::before{
+        content: '';
+        width: 20mm;
+        height: 0.5mm;
+        background-color: #000;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin:  auto;
+        left: 8mm;
+    }
+    .header-subtitle::after{
+        content: '';
+        width: 20mm;
+        height: 0.5mm;
+        background-color: #000;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        right:  8mm;
+    }
+    .institution-name {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+    }
+    
+    .od-table th,
+    .od-table td{
+        padding: 0mm 1.2mm;
+        vertical-align: middle!important;
+    }
+    .seperator {
+        border-width: 1mm;
+        border-color: #000;
+    }
+    .text-underline {
+        text-decoration: underline;
+    }
+    @media print {
+        *{
+            font-size: 4.5mm; 
+        }
+        body {
+            margin: 0;
+        }
+        .page{
+            width: initial;
+            page-break-after: always;
+            box-shadow: none;
+            margin-right: 0;
+        }
+    }
+</style>
+<body>
+    <div>
+        {% for student in data.students %}
+            {% if forloop.counter0|divisibleby:4 %}
+            <div class="page">
+                <div class="container">
+                    <header class="page-header container align-items-center d-flex">
+                        <div class="row mx-auto">
+                            <div class="text-right header-left">
+                                <img src="{% static 'odmanager/images/amity-logo.png' %}" class="logo">
+                            </div>
+                            <div class="header-right">
+                                <div class="row">
+                                    <div class="col-12 header-title">
+                                        Amity University
+                                    </div>
+                                    <div class="col-12 header-subtitle">
+                                        <span class="line-left">&nbsp;</span>Uttar Pradesh<span class="line-right"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <strong class="institution-name">Name of Institution: Amity School of Engineering and Technology</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container px-5">
+                            <div class="row mt-3">
+                                <div class="col-2"><strong>To:</strong></div>
+                                <div class="col-10">Head of Institution</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2"><strong>Through:</strong></div>
+                                <div class="col-10">Program Leader/Program Coordinator/Programme Director</div>
+                            </div>   
+                            <div class="row mt-3">
+                                <div class="col-12">The {% if forloop.counter0|add:4 < data.students|length %}4{% else %}{{ data.students|length|subtract:forloop.counter0 }}{% endif %} (No of students) are recommended to participate/organize following activity:</div>
+                            </div> 
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <ol>
+                                        <li class="container">
+                                            <div class="row font-weight-bold">
+                                                <div class="pl-3 col-5">Name of Activity <span class="float-right">:</span></div>
+                                                <div class="col-7">{{ data.event.title }}</div>
+                                            </div>
+                                        </li>
+                                        <li class="container">
+                                            <div class="row font-weight-bold">
+                                                <div class="pl-3 col-5">Date(s) of Activity <span class="float-right">:</span></div>
+                                                <div class="col-7">{{ data.event.start_date|date:'d-M-Y' }}{% if data.event.start_date|date:'d-M-Y' != data.event.end_date|date:'d-M-Y' %} - {{ data.event.end_date|date:'d-M-Y' }}{% endif %}</div>
+                                            </div>
+                                        </li>
+                                        <li class="container">
+                                            <div class="row font-weight-bold">
+                                                <div class="pl-3 col-5">Time of Activity & Duration <span class="float-right">:</span></div>
+                                                <div class="col-7">
+                                                    <div class="row">
+                                                        <div class="col-6 text-center">
+                                                            From: {{ data.event.start_date|date:'H:i' }}
+                                                        </div>
+                                                        <div class="col-6 text-left">
+                                                            To: {{ data.event.end_date|date:'H:i' }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">Following students will be on for Official Duty as per the details given below:</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <table class="table table-bordered mb-0 od-table">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No</th>
+                                                <th>Student Name</th>
+                                                <th>Enroll No.</th>
+                                                <th>Program</th>
+                                                <th>Courses which will be missed</th>
+                                                <th>Roles & Capabilites assigned</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+            {% endif %}
+                                            <tr>
+                                                <td>{{ forloop.counter|modulo:4|default:4 }}</td>
+                                                <td>{{ student.user.get_full_name }}</td>
+                                                <td>{{ student.user.enrollment_no }}</td>
+                                                <td>{{ student.user.branch }}</td>
+                                                <td>
+                                                    {% for subject in student.subjects %}
+                                                        {{ subject.name }} ({{ subject.timing }})
+                                                        {% if not forloop.last %}, {% endif %}
+                                                    {% endfor %}
+                                                </td>
+                                                <td>{{ student.role }}</td>
+                                            </tr>
+            {% if forloop.counter|divisibleby:4 or forloop.last %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    I will forward the students' performance report of the activity within 24 hrs of completion on duty.
+                                </div>
+                            </div>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-6">
+                                    Date: {{ data.od_date|date:'d-M-Y' }}
+                                </div>
+                                <div class="col-6 text-left">
+                                    <p>
+                                        Requested by
+                                    </p>
+                                    <p>
+                                        Signature: .............
+                                    </p>
+                                    <p class="mb-0">
+                                        Faculty in-charge for Activity: <strong>Demo Faculty</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <strong>NOTE: No OD will be granted for practice sessions.</strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <hr class="seperator">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <strong class="text-underline">Head of Institution's Approval</strong>
+                                </div>
+                            </div>
+                            <div class="row align-items-end">
+                                <div class="col-6">
+                                    <p>Approved/Not Approved</p>
+                                    <p>
+                                        Date: ..............
+                                    </p>
+                                </div>
+                                <div class="col-6"> 
+                                    <p>
+                                        Signature of Head of Institution: ...........
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>

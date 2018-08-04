@@ -1,0 +1,110 @@
+{% extends 'club/_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}OD Application | {{ event.title }}{% endblock %}
+
+{% block header_css %}
+    {{ formset.forms.0.media  }}
+{% endblock %}
+
+{% block content %}
+<style>
+    tr.hidden {
+        display: none;
+    }
+</style>
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-map card-map-placeholder" style="background-size:cover; background-image: url('{% if event.cover_image %}{{ event.cover_image.url }}{% else %}https://picsum.photos/1440/900/?random{% endif %}');"></div>
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">
+                            {{ event.title }}
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="h6">Start Date/Time</div>
+                                <p>{{ event.start_date }}</p>
+                            </div>
+                            <div class="col-6">
+                                <div class="h6">End Date/Time</div>
+                                <p>{{ event.end_date }}</p>
+                            </div>
+                            <div class="col-6">
+                                <div class="h6">Venue</div>
+                                <p>{{ event.venue }}</p>
+                            </div>
+                            <div class="col-6">
+                                <div class="h6">OD's Provided?</div>
+                                <p class="badge-pill {% if event.od %}badge-success{% else %}badge-danger{% endif %} font-weight-bold w-50 text-center">{% if event.od %}Yes{% else %}No{% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="page-header mt-0">
+                    <h3 class="page-title">Apply For OD</h3>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Basic Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>First Name:</strong> {{ user.first_name }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Last Name:</strong> {{ user.last_name }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Email:</strong> {{ user.email }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Mobile:</strong> {{ user.mobile }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Department:</strong> {{ user.department}}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Branch:</strong> {{ user.branch }}
+                            </div>
+                            <div class="col-12 col-md-6 my-3">
+                                <strong>Section-Batch:</strong> {{ user.section }}{{ user.branch.short_name }}-{{ user.batch }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        {% crispy formset helper %}
+                    </div>
+                    <a href="#" class="btn btn-primary addSubjBtn">Add Another Subject</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src=""></script>
+<script type="text/javascript">
+    require(['jquery', "bootstrap", "moment", "datetimepicker"], function($){
+        $(".addSubjBtn").click(function(e){
+            e.preventDefault();
+            var template = $("#odForm table tbody tr").first();
+            var counter = $("#odForm table tbody tr").length - 1;
+            var clone = template.clone();
+            clone.attr("class", "");
+            
+            clone.html(clone.html().replace(/__prefix__/g, counter));
+            $("#odForm table tbody").append(clone);
+            $("#id_{{ formset.prefix }}-TOTAL_FORMS").val(counter+1);
+        });
+    });
+</script>
+{% endblock %}

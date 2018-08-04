@@ -1,0 +1,301 @@
+{% extends 'club/_base.html' %} 
+
+{% block title %}{{ club.name }}{% endblock %}
+
+{% block content %}
+<div class="card card-profile border-0">
+    <div class="card-header" style="background-image: url('{% if club.cover_image %}{{ club.cover_image.url }}{% else %}https://picsum.photos/1440/900/?random{% endif %}'); height: 35vh; min-height: 9rem; background-position: center; background-attachment: fixed;"></div>
+    <div class="card-body text-center">
+        <img class="card-profile-img" src="{% if club.logo %}{{ club.logo.url }}{% else %}https://picsum.photos/200/200/?random{% endif %}">
+        <h3 class="mb-3">{{ club.name }}</h3>
+        <ul class="list-inline mb-1 mt-1 text-secondary">
+            <li class="list-inline-item">
+                <i class="fa fa-user"></i> {{ club_meta.members|length }} Members
+            </li>
+        </ul>
+        <p class="mb-4">
+            {{ club.short_description }}
+        </p>
+        <ul class="social-links list-inline mb-0 mt-2">
+            {% if club.facebook %}
+            <li class="list-inline-item">
+                <a href="{{ club.facebook }}" title="Follow us on Facebook!" data-toggle="tooltip" data-original-title="Facebook">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </li>
+            {% endif %}
+            {% if club.twitter %}
+            <li class="list-inline-item">
+                <a href="{{ club.twitter }}" title="" data-toggle="tooltip" data-original-title="Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+            {% endif %}
+            {% if club.phone %}
+            <li class="list-inline-item">
+                <a href="tel://+91{{ club.phone }}" title="" data-toggle="tooltip" data-original-title="1234567890">
+                    <i class="fa fa-phone"></i>
+                </a>
+            </li>
+            {% endif %}
+            {% if club.email %}
+            <li class="list-inline-item">
+                <a href="mailto:{{ club.email }}" title="" data-toggle="tooltip" data-original-title="@skypename">
+                    <i class="fa fa-mail"></i>
+                </a>
+            </li>
+            {% endif %}
+            {% if club.website %}
+            <li class="list-inline-item">
+                <a href="{{ club.website }}" title="" data-toggle="tooltip" data-original-title="@skypename">
+                    <i class="fa fa-globe"></i>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="page-single">
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-12 col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">About Us</h3>
+                        <div class="card-options">
+                            <a href="#" class="btn btn-primary btn-sm">Action 1</a>
+                            <a href="#" class="btn btn-secondary btn-sm ml-2">Action 2</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {{ club.description|safe }}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-map card-map-placeholder" style="background-image: url('https://picsum.photos/1440/900/?random');"></div>
+                    <div class="card-header">
+                        <h3 class="card-title font-weight-bold">
+                            Lorem Ipsum Event Details
+                        </h3>
+                        <div class="card-options">
+                            <a href="#" class="btn btn-outline-primary btn-sm">Register Now</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6 col-lg-3">
+                                <div class="h6">Start Date/Time</div>
+                                <p>01/01/1970</p>
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <div class="h6">End Date/Time</div>
+                                <p>01/01/1970</p>
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <div class="h6">Venue</div>
+                                <p>E3-309</p>
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <div class="h6">OD's Provided?</div>
+                                <p class="badge-pill badge-success font-weight-bold w-50 text-center">Yes</p>
+                            </div>
+                        </div>
+                        <div class="h6">Description</div>
+                        <div>
+                            <p>
+                            Duis labore irure eu est dolore cupidatat mollit amet nisi amet adipisicing voluptate. Pariatur ipsum eu sit cillum. Pariatur est eiusmod do ullamco esse cupidatat aute adipisicing sunt tempor tempor magna consectetur. Nostrud ea aliqua ea eu non nulla aliquip labore nostrud. Sunt sint ipsum irure non fugiat reprehenderit ut occaecat anim. Do ad consectetur aute amet.
+                            </p>
+                            <p>
+                            Incididunt mollit esse cillum aliquip in minim quis magna exercitation aliqua tempor ea exercitation. Elit anim quis reprehenderit occaecat excepteur ut labore eu adipisicing culpa dolore sit. Qui sit aliquip qui consequat voluptate amet tempor aliquip aliquip ad incididunt nostrud. Elit aliqua anim duis ipsum sint sit cillum consectetur ut culpa nisi id. Minim dolore ea sunt voluptate consectetur. Et aute consectetur aliqua exercitation ea elit laboris.
+                            </p>
+                            <p>
+                            Culpa in mollit ex deserunt nisi aliquip exercitation laboris est. Lorem ad enim fugiat eu fugiat nostrud eu est in. Est eiusmod ad duis et ad esse labore adipisicing.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer border-0">
+                        <div class="row align-items-end">
+                            <div class="col-12 col-md-9">
+                                <div class="h6">For Queries:</div>
+                                <ul class="list-inline d-flex align-items-center">
+                                    <li class="list-inline-item mr-2">
+                                        <a href="#"><div class="avatar" style="background-image: url('https://picsum.photos/200/200/?random')" data-toggle="tooltip" data-original-title="Lore"></div></a>
+                                    </li>
+                                    <li class="list-inline-item mr-2">
+                                        <a href="#"><div class="avatar" style="background-image: url('https://picsum.photos/200/200/?random')" data-toggle="tooltip" data-original-title="Lore"></div></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-3 text-center text-md-right">
+                                <a class="btn btn-outline-secondary btn-sm" href="#">View all Events</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% comment %}
+                <div class="card py-5">
+                    <div class="card-body text-center py-5">
+                        <div class="fa fa-calendar fa-4x text-secondary"></div>
+                        <div class="h3 text-secondary mt-5">
+                            No Upcoming Event
+                        </div>
+                    </div>
+                </div>
+                {% endcomment %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Message">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary">
+                                    <i class="fe fe-send"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group card-list-group">
+                        <li class="list-group-item py-5">
+                            <div class="media">
+                                <div class="media-object avatar avatar-md mr-4" style="background-image: url(demo/faces/male/16.jpg)"></div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <small class="float-right text-muted">4 min</small>
+                                        <h5>Peter Richards</h5>
+                                    </div>
+                                    <div>
+                                        Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac
+                                        consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas
+                                        eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus
+                                        et magnis dis parturient montes, nascetur ridiculus mus.
+                                    </div>
+                                    <ul class="media-list">
+                                        <li class="media mt-4">
+                                            <div class="media-object avatar mr-4" style="background-image: url(demo/faces/female/17.jpg)"></div>
+                                            <div class="media-body">
+                                                <strong>Debra Beck: </strong>
+                                                Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                                                Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus
+                                                magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at
+                                                lobortis.
+                                            </div>
+                                        </li>
+                                        <li class="media mt-4">
+                                            <div class="media-object avatar mr-4" style="background-image: url(demo/faces/male/32.jpg)"></div>
+                                            <div class="media-body">
+                                                <strong>Jack Ruiz: </strong>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+                                                nibh, ut fermentum massa justo sit amet risus.
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item py-5">
+                            <div class="media">
+                                <div class="media-object avatar avatar-md mr-4" style="background-image: url(demo/faces/male/16.jpg)"></div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <small class="float-right text-muted">12 min</small>
+                                        <h5>Peter Richards</h5>
+                                    </div>
+                                    <div>
+                                        Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum
+                                        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elit.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item py-5">
+                            <div class="media">
+                                <div class="media-object avatar avatar-md mr-4" style="background-image: url(demo/faces/male/16.jpg)"></div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <small class="float-right text-muted">34 min</small>
+                                        <h5>Peter Richards</h5>
+                                    </div>
+                                    <div>
+                                        Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam.
+                                        Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada
+                                        magna mollis euismod. Donec sed odio dui.
+                                    </div>
+                                    <ul class="media-list">
+                                        <li class="media mt-4">
+                                            <div class="media-object avatar mr-4" style="background-image: url(demo/faces/male/26.jpg)"></div>
+                                            <div class="media-body">
+                                                <strong>Wayne Holland: </strong>
+                                                Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                                                Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus
+                                                magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at
+                                                lobortis.
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Team</h3>
+                        <div class="card-options">
+                            <div class="text-secondary">{{ club_meta.team|length }}</div>
+                        </div>
+                    </div>
+                    <div class="card-body o-auto" style="height: 15rem">
+                        <ul class="list-unstyled list-separated">
+                            {% for member in club_meta.team %}
+                            <li class="list-separated-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="avatar avatar-md d-block" style="background-image: url({% if member.user.avatar %}{{ member.user.avatar.url }}{% endif %})"></span>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <a href="javascript:void(0)" class="text-inherit">{{ member.user.get_full_name }}</a>
+                                        </div>
+                                        <small class="d-block item-except text-sm text-muted h-1x">{% for role in member.roles %}{{ role.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</small>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Members</h3>
+                        <div class="card-options">
+                            <div class="text-secondary">{{ club_meta.members|length }}</div>
+                        </div>
+                    </div>
+                    <div class="card-body o-auto" style="height: 15rem">
+                        <ul class="list-unstyled list-separated">
+                            {% for member in club_meta.members %}
+                            <li class="list-separated-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="avatar avatar-md d-block" style="background-image: url({% if member.user.avatar %}{{ member.user.avatar.url }}{% endif %})"></span>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <a href="javascript:void(0)" class="text-inherit">{{ member.user.get_full_name }}</a>
+                                        </div>
+                                        <small class="d-block item-except text-sm text-muted h-1x">{% for role in member.roles %}{{ role.label }}{% if not forloop.last %}, {% endif %}{% endfor %}</small>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
